@@ -1,10 +1,14 @@
-<div>
+<div class="part2">
   <app-input [hidden]="true" [control]="sexControl" />
   <app-input [hidden]="true" [control]="showGenderProfileControl" />
   <h1>I am a {{ (sex) ? sex : '...' }}</h1>
-  <app-button (click)="selectSex('Man')" text="Man" />
-  <app-button (click)="selectSex('Woman')" text="Woman" />
+  <div class="options">
+    <app-button (click)="selectSex('Man')" text="Man" />
+    <app-button (click)="selectSex('Woman')" text="Woman" />
+  </div>
   <app-checkbox [checked]="check" (click)="checked()" text="Show my gender on my profile" />
-  <app-button (click)="goTo(1)" text="Back" />
-  <app-button (click)="goTo(3)" text="Next" />
+  <div class="buttons">
+    <app-button (click)="goTo(1)" text="Back" />
+    <app-button (click)="goTo(3)" text="Next" />
+  </div>
 </div>

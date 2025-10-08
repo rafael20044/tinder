@@ -1,9 +1,11 @@
 <div>
   <h1>Add photos</h1>
-  <app-button text="Select photo" />
+  <app-button (click)="pick()" text="Select photo" />
   <div class="photos">
-
+    <p>here show photos...</p>
   </div>
-  <app-button (click)="doEmitter(4)" text="Back" />
-  <app-button type="submit" text="finish" />
+  <div class="buttons">
+    <app-button (click)="doEmitter(4)" text="Back" />
+    <app-button type="submit" text="finish" />
+  </div>
 </div>

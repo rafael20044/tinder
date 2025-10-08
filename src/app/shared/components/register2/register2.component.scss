@@ -1,0 +1,17 @@
+.part2{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.part2 .options{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.part2 .buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

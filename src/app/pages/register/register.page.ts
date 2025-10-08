@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Const } from 'src/app/const/const';
+import { IUserCreate } from 'src/app/interfaces/iuser-create';
+import { AuthService } from 'src/app/shared/services/auth-service';
+import { DatabaseService } from 'src/app/shared/services/database-service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +22,7 @@ export class RegisterPage implements OnInit {
   sexControl = new FormControl('', [Validators.required]);
   birthDateControl = new FormControl('', [Validators.required]);
   showGenderProfileControl = new FormControl(false);
-  passionControl = new FormControl([]);
+  passionControl = new FormControl([], [Validators.required]);
   formGroup = new FormGroup({
     name: this.nameControl,
     lastName: this.lastNameControl,
@@ -32,7 +37,11 @@ export class RegisterPage implements OnInit {
 
   registerId = 1;
 
-  constructor() { }
+  constructor(
+    private readonly auth:AuthService, 
+    private readonly database:DatabaseService,
+    private readonly router:Router
+  ) { }
 
   async ngOnInit() {
   }
@@ -41,9 +50,40 @@ export class RegisterPage implements OnInit {
     this.registerId = id;
   }
 
-  doSubmit(){
-    console.log('holaaa');
-    console.log(this.formGroup.value);
+  async doSubmit(){
+    if (!this.formGroup.valid) {
+      console.log("please fill all requered fields")
+      return;
+    }
+    const {
+      email, 
+      password, 
+      birthDate, 
+      country, 
+      lastName, 
+      name, 
+      passions, 
+      sex, 
+      showGenderProfile
+    } = this.formGroup.value;
+    const uid = await this.auth.createUserEmailAndPassword(email || '', password || '');
+    if (uid) {
+      const user:IUserCreate = {
+        uid: uid,
+        birthDate: birthDate || '',
+        country: country || '',
+        email: email || '',
+        lastName: lastName || '',
+        name: name || '',
+        passions: passions || [],
+        password: password || '',
+        sex: sex || '',
+        showGenderProfile: showGenderProfile || false,
+        photos: [],
+      }
+      await this.database.setData(Const.COLLECTION_USERS, user);
+      this.router.navigate(['/home']);
+    }
   }
 
 }

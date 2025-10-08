@@ -1,13 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1>Tinder</h1>
+  <form (submit)="doSubmit()" [formGroup]="formGroup">
+    @switch (registerId) {
+      @case (1) {
+        <app-register1 
+        (emitter)="getEmitter($event)"
+        [countryControl]="countryControl"
+        [emailControl]="emailControl"
+        [lastNameControl]="lastNameControl"
+        [nameControl]="nameControl"
+        [passwordControl]="passwordControl"
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        />
+      }
+      @case (2) {
+        <app-register2 
+        (emitter)="getEmitter($event)"
+        [sexControl]="sexControl"
+        [showGenderProfileControl]="showGenderProfileControl"
+        />
+      }
+      @case (3) {
+        <app-register3 
+          (emitter)="getEmitter($event)"
+          [birthDateControl]="birthDateControl"
+        />
+      }
+      @case (4) {
+        <app-register4 
+          (emitter)="getEmitter($event)"
+          [passionControl]="passionControl"
+        />
+      }
+      @case (5) {
+        <app-register5 (emitter)="getEmitter($event)" />
+      }
+    }
+  </form>
 </ion-content>

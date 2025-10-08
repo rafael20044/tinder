@@ -1,0 +1,5 @@
+<ion-select label="Countries" placeholder="Select your country" [formControl]="control">
+  @for (item of countriesSort; track $index) {
+    <ion-select-option value="{{item.name}}">{{item.name}}</ion-select-option>
+  }
+</ion-select>

@@ -1,0 +1,18 @@
+<div> 
+  <app-input [hidden]="true" [control]="passionControl" />
+  <h1>Passions</h1>
+  <p>Select your passions</p>
+  <div class="passions">
+    <ion-list>
+      <div class="grid">
+        @for (item of passions; track $index) {
+          <ion-item>
+            <p (click)="select($index)">{{item.name}} {{ (item.selected) ? '👍' : ''}}</p>
+          </ion-item>
+        }       
+      </div>
+    </ion-list>
+  </div>
+  <app-button (click)="doEmitter(3)" text="Back" />
+  <app-button (click)="doEmitter(5)" text="Next" />
+</div>

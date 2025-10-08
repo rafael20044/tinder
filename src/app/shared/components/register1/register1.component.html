@@ -1,0 +1,9 @@
+<div class="part1">
+  <app-input label="First name" placeholder="Jane" [control]="nameControl" />
+  <app-input label="Last name" placeholder="Doe" [control]="lastNameControl" />
+  <app-input label="Email" placeholder="jane@gmail.com" type="email" [control]="emailControl" />
+  <app-input label="Password" placeholder="********" type="password" [control]="passwordControl" />
+  <app-select [control]="countryControl"/>
+  <app-button (click)="goToLogin()" text="Cancel" />
+  <app-button (click)="emitNextId()" text="Next" />
+</div>

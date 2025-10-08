@@ -1,13 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1>Tinder</h1>
+  <div class="part1">
+    <app-input label="First name" placeholder="Jane"/>
+    <app-input label="Last name" placeholder="Doe"/>
+    <app-input label="Email" placeholder="jane@gmail.com" type="email"/>
+    <app-input label="Password" placeholder="********" type="password"/>
+    
+  </div>
 </ion-content>

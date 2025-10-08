@@ -1,0 +1,8 @@
+<div>
+  <app-input [hidden]="true" [control]="birthDateControl" />
+  <h1>Your birthday</h1>
+  <ion-datetime presentation="date" (ionChange)="doDone($event)">
+  </ion-datetime>
+  <app-button (click)="doEmitter(2)" text="Back" />
+  <app-button (click)="doEmitter(4)" text="Next" />
+</div>

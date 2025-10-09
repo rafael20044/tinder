@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth-service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,11 @@ export class LoginPage implements OnInit {
     password: this.passwordControl
   });
 
-  constructor(private readonly router:Router, private readonly auth:AuthService) { }
+  constructor(
+    private readonly router:Router, 
+    private readonly auth:AuthService,
+    private readonly local:LocalStorageService
+  ) { }
 
   ngOnInit() {
   }
@@ -35,6 +40,7 @@ export class LoginPage implements OnInit {
     const {email, password} = this.formGroup.value;
     const user = await this.auth.loginWithEmailAndPassword(email || '', password || '');
     if (user) {
+      this.local.set('uid', user.uid);
       this.router.navigate(['/home']);
     }
   }

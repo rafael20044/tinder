@@ -33,7 +33,10 @@
         />
       }
       @case (5) {
-        <app-register5 (emitter)="getEmitter($event)" />
+        <app-register5 
+          (emitter)="getEmitter($event)" 
+          [fileControl]="fileControl"
+          />
       }
     }
   </form>

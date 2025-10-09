@@ -1,8 +1,11 @@
 <div>
+  <app-input [hidden]="true" [control]="fileControl" />
   <h1>Add photos</h1>
   <app-button (click)="pick()" text="Select photo" />
   <div class="photos">
-    <p>here show photos...</p>
+    @for (item of files; track $index) {
+      <img src="{{item.url}}" />
+    }
   </div>
   <div class="buttons">
     <app-button (click)="doEmitter(4)" text="Back" />

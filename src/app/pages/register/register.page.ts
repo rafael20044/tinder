@@ -23,6 +23,7 @@ export class RegisterPage implements OnInit {
   birthDateControl = new FormControl('', [Validators.required]);
   showGenderProfileControl = new FormControl(false);
   passionControl = new FormControl([], [Validators.required]);
+  fileControl = new FormControl();
   formGroup = new FormGroup({
     name: this.nameControl,
     lastName: this.lastNameControl,
@@ -33,6 +34,7 @@ export class RegisterPage implements OnInit {
     birthDate: this.birthDateControl,
     showGenderProfile: this.showGenderProfileControl,
     passions: this.passionControl,
+    photos: this.fileControl,
   });
 
   registerId = 1;
@@ -64,7 +66,8 @@ export class RegisterPage implements OnInit {
       name, 
       passions, 
       sex, 
-      showGenderProfile
+      showGenderProfile,
+      photos
     } = this.formGroup.value;
     const uid = await this.auth.createUserEmailAndPassword(email || '', password || '');
     if (uid) {
@@ -79,9 +82,10 @@ export class RegisterPage implements OnInit {
         password: password || '',
         sex: sex || '',
         showGenderProfile: showGenderProfile || false,
-        photos: [],
+        photos: photos,
       }
       await this.database.setData(Const.COLLECTION_USERS, user);
+      this.formGroup.reset();
       this.router.navigate(['/home']);
     }
   }

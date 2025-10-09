@@ -10,4 +10,6 @@ export const environment = {
     appId: "1:411374511905:web:7abed4c59a4cf82d3a4060",
     measurementId: "G-LJ00KWQHP5"
   },
+  SUPABASE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV6cWR3a3BmaGlyamF4aWt4Y2NoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5MDAzMDUsImV4cCI6MjA3NTQ3NjMwNX0.xsnUq7WEE6cxZWplzeAkdol434U5Rkh5IOda1_nBHa4",
+
 };

@@ -1,3 +1,9 @@
+.photos{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
 .buttons{
     margin-top: 2rem;
     display: flex;

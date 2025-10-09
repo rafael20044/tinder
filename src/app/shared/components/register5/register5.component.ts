@@ -1,5 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { FilePickerService } from 'src/app/core/provider/file-picker-service';
+import { SupabaseService } from '../../services/supabase-service';
+import { Const } from 'src/app/const/const';
+import { IPhoto } from 'src/app/interfaces/iphoto';
 
 @Component({
   selector: 'app-register5',
@@ -9,11 +13,17 @@ import { FilePickerService } from 'src/app/core/provider/file-picker-service';
 })
 export class Register5Component  implements OnInit {
 
+  @Input() fileControl = new FormControl();
+
   @Output() emitter = new EventEmitter<number>();
 
-  constructor(private readonly file:FilePickerService) { }
+  files:IPhoto[] = [];
 
-  ngOnInit() {}
+  constructor(private readonly file:FilePickerService, private readonly supabase:SupabaseService) { }
+
+  ngOnInit() {
+    this.loadFiles();
+  }
 
   doEmitter(id:number){
     this.emitter.emit(id);
@@ -21,7 +31,17 @@ export class Register5Component  implements OnInit {
 
   async pick(){
     const file = await this.file.pickerPhoto();
-    console.log(file);
+    if (file) {
+      const result = await this.supabase.upload(Const.BUCKET, 'photo', file.name, file.data || '', file.mimeType);
+      if (result) {
+        this.files.push(result);
+        this.fileControl.setValue(this.files);
+      }
+    }
+  }
+
+  private loadFiles(){
+    this.files = this.fileControl.value || [];
   }
 
 }

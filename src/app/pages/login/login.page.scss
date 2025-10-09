@@ -1,0 +1,17 @@
+
+h1{
+    text-align: center;
+}
+
+form{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

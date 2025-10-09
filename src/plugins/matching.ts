@@ -1,7 +1,9 @@
 import { registerPlugin } from '@capacitor/core';
+import { IUserCreate } from 'src/app/interfaces/iuser-create';
+import { IUserMatch } from 'src/app/interfaces/iuser-match';
 
 export interface MatchingPlugin {
-    open(): Promise<void>;
+    open:(option: {users:IUserCreate[]}) => Promise<void>;
 }
 
 const Matching = registerPlugin<MatchingPlugin>('MatchingPlugin');

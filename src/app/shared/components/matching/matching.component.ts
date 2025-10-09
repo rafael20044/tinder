@@ -12,7 +12,7 @@ export class MatchingComponent  implements OnInit {
   constructor() { }
 
   async ngOnInit() {
-    await Matching.open();
+    // await Matching.open();
   }
 
 }

@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="body">
+    <h1>Welcome</h1>
+    <p>Please follow the house rule</p>
+    <div class="rules">
+      <ion-list>
+        <ion-item>
+          <div>
+            <h2>Be yourself</h2>
+            <p>Make sure your photos, age and bio are true to who you are</p>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            <h2>Stay safe</h2>
+            <p>Don't be too quick to give out personal information</p>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div>
+            <h2>Play it cool</h2>
+            <p>Respect others and treat them as you would like to be treated</p>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+    <br>
+    <app-button (click)="ok()" text="Got it"/>
+  </div>
+</ion-content>

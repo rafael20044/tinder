@@ -1,21 +1,10 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Profile</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content [fullscreen]="true">
-  <app-button text="salir" (click)="exit()" />
-  @if (user) {
-    <h1>{{ user.name }} {{ user.lastName }}</h1>
-  }
-</ion-content> -->
 <ion-header>
   <ion-toolbar>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content class="ion-padding">
   @if (user) {
   <form [formGroup]="formGroup" (ngSubmit)="doSubmit()">
     <app-input label="Name" [control]="nameControl" />

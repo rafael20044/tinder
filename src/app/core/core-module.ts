@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Capacitor } from '@capacitor/core';
 import { FilePickerService } from './provider/file-picker-service';
 import { StatusBarService } from './provider/status-bar';
+import { LocalStorageService } from '../shared/services/local-storage';
 
 
 
@@ -15,7 +16,11 @@ import { StatusBarService } from './provider/status-bar';
 })
 export class CoreModule implements OnInit { 
 
-  constructor(private readonly file:FilePickerService, private readonly statusBar:StatusBarService){
+  constructor(
+    private readonly file:FilePickerService, 
+    private readonly statusBar:StatusBarService,
+    private readonly local:LocalStorageService
+  ){
     this.ngOnInit();
   }
 

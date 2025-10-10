@@ -8,6 +8,7 @@ import { FilePickerService } from 'src/app/core/provider/file-picker-service';
 import { SupabaseService } from '../../services/supabase-service';
 import { Const } from 'src/app/const/const';
 import { Toast } from '../../provider/toast';
+import { Ipassions } from 'src/app/interfaces/ipassions';
 
 @Component({
   selector: 'app-profile',
@@ -26,20 +27,39 @@ export class ProfileComponent implements OnInit {
     name: this.nameControl,
     lastName: this.lastNameControl,
   });
+  checked = false;
+  passions: Ipassions[] = [
+    { name: 'Music', selected: false },
+    { name: 'Sports', selected: false },
+    { name: 'Travel', selected: false },
+    { name: 'Reading', selected: false },
+    { name: 'Cooking', selected: false },
+    { name: 'Movies', selected: false },
+    { name: 'Fitness', selected: false },
+    { name: 'Art', selected: false },
+    { name: 'Gaming', selected: false },
+    { name: 'Dancing', selected: false },
+  ];
+  passionsSelected: string[] = [];
 
   constructor(
     private readonly auht: AuthService,
     private readonly database: DatabaseService,
     private readonly local: LocalStorageService,
-    private readonly file:FilePickerService,
-    private readonly supabase:SupabaseService,
-    private readonly toast:Toast,
+    private readonly file: FilePickerService,
+    private readonly supabase: SupabaseService,
+    private readonly toast: Toast,
   ) { }
 
   async ngOnInit() {
     this.uid = this.local.get<string>('uid');
     await this.loadUser();
     this.initForm();
+    if (this.user) {
+      this.checked = this.user.showGenderProfile;
+      this.passionsSelected = this.user.passions;
+    }
+    this.verifySelected();
   }
 
   exit() {
@@ -57,11 +77,11 @@ export class ProfileComponent implements OnInit {
       birthDate: this.user?.birthDate || '',
       country: this.countryControl.value || '',
       email: this.user?.email || '',
-      passions: this.user?.passions || [],
+      passions: this.passionsSelected || [],
       password: this.user?.password || '',
       photos: this.user?.photos || [],
       sex: this.user?.sex || '',
-      showGenderProfile: this.user?.showGenderProfile || false,
+      showGenderProfile: this.checked,
       uid: this.user?.uid || '',
     }
     this.database.updateData(this.uid || '', data);
@@ -72,7 +92,7 @@ export class ProfileComponent implements OnInit {
     this.toast.presentToast('bottom', 'updated');
   }
 
-  deleteImg(path:string){
+  deleteImg(path: string) {
     if (this.user) {
       this.user.photos = this.user.photos.filter(p => p.path != path);
     }
@@ -88,9 +108,28 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  setSex(sex:string){
+  setSex(sex: string) {
     if (this.user) {
       this.user.sex = sex;
+    }
+  }
+
+  show() {
+    if (this.user) {
+      this.checked = !this.checked;
+    }
+  }
+
+
+  select(index: number) {
+    this.passions[index].selected = !this.passions[index].selected;
+    this.passionsSelected = this.passions.filter(p => p.selected).map(p => p.name);
+  }
+
+  doDone(event:any){
+    const date = event.detail.value;
+    if (this.user) {
+      this.user.birthDate = date;
     }
   }
 
@@ -104,6 +143,14 @@ export class ProfileComponent implements OnInit {
       this.lastNameControl.setValue(this.user.lastName);
       this.countryControl.setValue(this.user.country);
     }
+  }
+
+  private verifySelected() {
+    this.passions.forEach(p => {
+      if (this.passionsSelected.includes(p.name)) {
+        p.selected = true;
+      }
+    });
   }
 
 }

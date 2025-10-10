@@ -3,18 +3,6 @@
     <ion-tab tab="home">
       <app-home-c />
     </ion-tab>
-    <ion-tab tab="chat">
-      <div id="library-page">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Chat</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <div class="example-content">I neeed more time</div>
-        </ion-content>
-      </div>
-    </ion-tab>
     <ion-tab tab="profile">
       <app-profile />
     </ion-tab>
@@ -28,7 +16,7 @@
         <ion-icon name="magnet-outline"></ion-icon>
         Matching
       </ion-tab-button>
-      <ion-tab-button tab="chat">
+      <ion-tab-button (click)="openChat()">
         <ion-icon name="chatbubble-outline"></ion-icon>
         Chat
       </ion-tab-button>

@@ -7,6 +7,7 @@ import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { DatabaseService } from 'src/app/shared/services/database-service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage';
+import ChatPlugin from 'src/plugins/chat';
 import Matching from 'src/plugins/matching';
 
 @Component({
@@ -37,6 +38,13 @@ export class HomePage implements OnInit {
       const users = await this.database.getAll<IUserCreate>(Const.COLLECTION_USERS);
       const usersF = users.filter(u => u.uid != this.uid);
       await Matching.open({users: usersF});
+    }
+  }
+
+  async openChat(){
+    if (Capacitor.isNativePlatform()) {
+      this.toast.presentToast('bottom', 'wait a minute');
+      await ChatPlugin.open();
     }
   }
 

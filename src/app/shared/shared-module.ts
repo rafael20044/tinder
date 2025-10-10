@@ -13,6 +13,8 @@ import { Register5Component } from './components/register5/register5.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatchingComponent } from './components/matching/matching.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -29,6 +31,8 @@ import { MatchingComponent } from './components/matching/matching.component';
     Register5Component,
     CheckboxComponent,
     MatchingComponent,
+    HomeComponent,
+    ProfileComponent,
   ],
   providers: [HttpProvider],
   imports: [
@@ -48,6 +52,8 @@ import { MatchingComponent } from './components/matching/matching.component';
     Register5Component,
     CheckboxComponent,
     MatchingComponent,
+    HomeComponent,
+    ProfileComponent,
   ]
 })
 export class SharedModule { }

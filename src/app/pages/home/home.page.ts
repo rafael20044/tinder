@@ -3,8 +3,10 @@ import { Capacitor } from '@capacitor/core';
 import { Const } from 'src/app/const/const';
 import { IUserCreate } from 'src/app/interfaces/iuser-create';
 import { IUserMatch } from 'src/app/interfaces/iuser-match';
+import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { DatabaseService } from 'src/app/shared/services/database-service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage';
 import Matching from 'src/plugins/matching';
 
 @Component({
@@ -15,20 +17,26 @@ import Matching from 'src/plugins/matching';
 })
 export class HomePage implements OnInit {
 
-  constructor(private readonly auht:AuthService, private readonly database:DatabaseService) { }
+  uid: string | null = "";
+
+  constructor(
+    private readonly database:DatabaseService, 
+    private readonly local:LocalStorageService,
+    private readonly toast:Toast
+  ) { }
 
   ngOnInit() {
+    this.uid = this.local.get<string>('uid');
   }
 
-  exit(){
-    this.auht.mySingOut();
-  }
 
   async openMatch(){
-    const users = await this.database.getAll<IUserCreate>(Const.COLLECTION_USERS);
-    // console.log(users);
+    // co]sole.log(usersF);
     if (Capacitor.isNativePlatform()) {
-      await Matching.open({users: users});
+      this.toast.presentToast('bottom', 'wait a minute');
+      const users = await this.database.getAll<IUserCreate>(Const.COLLECTION_USERS);
+      const usersF = users.filter(u => u.uid != this.uid);
+      await Matching.open({users: usersF});
     }
   }
 

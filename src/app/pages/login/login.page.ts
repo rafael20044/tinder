@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage';
 
@@ -22,7 +23,8 @@ export class LoginPage implements OnInit {
   constructor(
     private readonly router:Router, 
     private readonly auth:AuthService,
-    private readonly local:LocalStorageService
+    private readonly local:LocalStorageService,
+    private readonly toast:Toast,
   ) { }
 
   ngOnInit() {
@@ -34,7 +36,7 @@ export class LoginPage implements OnInit {
 
   async doSubmit(){
     if (!this.formGroup.valid) {
-      console.log('fill all inputs');
+      this.toast.presentToast('bottom', 'please fill all requered fields');
       return;
     }
     const {email, password} = this.formGroup.value;
@@ -42,7 +44,9 @@ export class LoginPage implements OnInit {
     if (user) {
       this.local.set('uid', user.uid);
       this.router.navigate(['/home']);
+      return;
     }
+    this.toast.presentToast('bottom', 'Error');
   }
 
 }

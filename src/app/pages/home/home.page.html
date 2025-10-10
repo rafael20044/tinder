@@ -1,41 +1,22 @@
 <ion-content [fullscreen]="true">
   <ion-tabs>
     <ion-tab tab="home">
-      <div id="home-page">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Listen now</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <div class="example-content">Listen now content</div>
-        </ion-content>
-      </div>
+      <app-home-c />
     </ion-tab>
     <ion-tab tab="chat">
       <div id="library-page">
         <ion-header>
           <ion-toolbar>
-            <ion-title>Library</ion-title>
+            <ion-title>Chat</ion-title>
           </ion-toolbar>
         </ion-header>
         <ion-content>
-          <div class="example-content">Library content</div>
+          <div class="example-content">I neeed more time</div>
         </ion-content>
       </div>
     </ion-tab>
     <ion-tab tab="profile">
-      <div id="search-page">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Search</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <div class="example-content">Search content</div>
-          <app-button text="salir" (click)="exit()" />
-        </ion-content>
-      </div>
+      <app-profile />
     </ion-tab>
 
     <ion-tab-bar slot="bottom">

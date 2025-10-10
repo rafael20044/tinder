@@ -1,0 +1,53 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <app-button text="salir" (click)="exit()" />
+  @if (user) {
+    <h1>{{ user.name }} {{ user.lastName }}</h1>
+  }
+</ion-content> -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="body">
+    @if (user) {
+      <h1>{{ user.name }} {{ user.lastName }}!</h1>
+      <form [formGroup]="formGroup" (ngSubmit)="doSubmit()">
+        <app-input label="Name" [control]="nameControl"/>
+        <app-input label="Last name" [control]="lastNameControl"/>
+        <app-select [control]="countryControl" />
+        <ion-grid>
+          <ion-row>
+            <ion-col><p>You're a {{ user.sex }}</p></ion-col>
+            <ion-col> <app-button (click)="setSex('Man')" text="Man" />  </ion-col>
+            <ion-col> <app-button (click)="setSex('Woman')" text="Woman" /> </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="imgs">
+          @for (item of user.photos; track $index) {
+            <ion-card>
+              <ion-card-content>
+                <img src="{{item.url}}" alt="">
+              </ion-card-content>
+              <app-button (click)="deleteImg(item.path)" text="delete" />
+            </ion-card>
+          }
+        </div>
+        <app-button (click)="getImg()" text="New image" />
+        <div class="buttons">
+          <app-button (click)="exit()" text="Exit"/>
+          <app-button text="Update" type="submit" />
+        </div>
+      </form>
+    }@else {
+      <ion-spinner />
+    }
+  </div>
+</ion-content>

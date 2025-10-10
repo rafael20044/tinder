@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Const } from 'src/app/const/const';
 import { IUserCreate } from 'src/app/interfaces/iuser-create';
+import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { DatabaseService } from 'src/app/shared/services/database-service';
 
@@ -42,7 +43,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private readonly auth:AuthService, 
     private readonly database:DatabaseService,
-    private readonly router:Router
+    private readonly router:Router,
+    private readonly toast:Toast
   ) { }
 
   async ngOnInit() {
@@ -54,7 +56,8 @@ export class RegisterPage implements OnInit {
 
   async doSubmit(){
     if (!this.formGroup.valid) {
-      console.log("please fill all requered fields")
+      // console.log("please fill all requered fields")
+      this.toast.presentToast('bottom', 'please fill all requered fields')
       return;
     }
     const {

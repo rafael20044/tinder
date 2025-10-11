@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
-  <ion-tabs>
+  <ion-tabs  #tabs (ionTabsDidChange)="onTabChange($event)">
     <ion-tab tab="home">
       <app-home-c />
     </ion-tab>
     <ion-tab tab="profile">
-      <app-profile />
+      <app-profile (onLogout)="handleLogout()" />
     </ion-tab>
 
     <ion-tab-bar slot="bottom">

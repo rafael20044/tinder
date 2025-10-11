@@ -34,7 +34,7 @@ public class ChatController extends AppCompatActivity {
         String text = editMessage.getText().toString().trim();
         if (!text.isEmpty()) {
           messages.add(new Message(text, true));
-          messages.add(new Message("Respuesta automática a: " + text, false));
+          messages.add(new Message( text, false));
           adapter.notifyDataSetChanged();
           recyclerView.scrollToPosition(messages.size() - 1);
           editMessage.setText("");

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../services/auth-service';
 import { DatabaseService } from '../../services/database-service';
 import { LocalStorageService } from '../../services/local-storage';
@@ -17,6 +17,8 @@ import { Ipassions } from 'src/app/interfaces/ipassions';
   standalone: false,
 })
 export class ProfileComponent implements OnInit {
+
+  @Output() onLogout = new EventEmitter<void>();
 
   uid: string | null = "";
   user: IUserCreate | null = null;
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
     { name: 'Dancing', selected: false },
   ];
   passionsSelected: string[] = [];
+  reload = false;
 
   constructor(
     private readonly auht: AuthService,
@@ -60,10 +63,12 @@ export class ProfileComponent implements OnInit {
       this.passionsSelected = this.user.passions;
     }
     this.verifySelected();
+    this.reload = false;
   }
 
   exit() {
     this.auht.mySingOut();
+    this.onLogout.emit();
   }
 
   async doSubmit() {
@@ -126,10 +131,19 @@ export class ProfileComponent implements OnInit {
     this.passionsSelected = this.passions.filter(p => p.selected).map(p => p.name);
   }
 
-  doDone(event:any){
+  doDone(event: any) {
     const date = event.detail.value;
     if (this.user) {
       this.user.birthDate = date;
+    }
+  }
+
+  refresh(){
+    const reload = this.local.get<boolean>('reload');
+    if (reload) {
+      this.reload = reload;
+      this.ngOnInit();
+      this.local.set('reload', false);
     }
   }
 

@@ -43,6 +43,7 @@ export class LoginPage implements OnInit {
     const user = await this.auth.loginWithEmailAndPassword(email || '', password || '');
     if (user) {
       this.local.set('uid', user.uid);
+      this.local.set('reload', true);
       this.router.navigate(['/home']);
       return;
     }

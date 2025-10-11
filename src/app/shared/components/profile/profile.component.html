@@ -4,55 +4,57 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  @if (user) {
-  <form [formGroup]="formGroup" (ngSubmit)="doSubmit()">
-    <app-input label="Name" [control]="nameControl" />
-    <app-input label="Last name" [control]="lastNameControl" />
-    <app-select [control]="countryControl" />
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <p>You're a {{ user.sex }}</p>
-        </ion-col>
-        <ion-col> <app-button (click)="setSex('Man')" text="Man" /> </ion-col>
-        <ion-col> <app-button (click)="setSex('Woman')" text="Woman" /> </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <p>Show your sex?</p>
-        </ion-col>
-        <ion-col>
-          <app-checkbox (click)="show()" [checked]="checked" />
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="grid">
-      <p>Your passions</p>
-      @for (item of passions; track $index) {
-      <ion-item>
-        <p (click)="select($index)">{{item.name}} {{ (item.selected) ? '👍' : ''}}</p>
-      </ion-item>
-      }
-    </div>
-    <h1>Your birthday</h1>
-    <ion-datetime presentation="date" (ionChange)="doDone($event)" [value]="user.birthDate"/>
-    <div class="imgs">
-      @for (item of user.photos; track $index) {
-      <ion-card class="card">
-        <ion-card-content>
-          <img src="{{item.url}}" alt="">
-        </ion-card-content>
-        <app-button (click)="deleteImg(item.path)" text="delete" />
-      </ion-card>
-      }
-    </div>
-    <app-button (click)="getImg()" text="New image" />
-    <div class="buttons">
-      <app-button (click)="exit()" text="Exit" />
-      <app-button text="Update" type="submit" />
-    </div>
-  </form>
+<ion-content [fullscreen]="true" class="ion-padding">
+  @if (!reload) {
+    @if (user) {
+      <form [formGroup]="formGroup" (ngSubmit)="doSubmit()">
+        <app-input label="Name" [control]="nameControl" />
+        <app-input label="Last name" [control]="lastNameControl" />
+        <app-select [control]="countryControl" />
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <p>You're a {{ user.sex }}</p>
+            </ion-col>
+            <ion-col> <app-button (click)="setSex('Man')" text="Man" /> </ion-col>
+            <ion-col> <app-button (click)="setSex('Woman')" text="Woman" /> </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p>Show your sex?</p>
+            </ion-col>
+            <ion-col>
+              <app-checkbox (click)="show()" [checked]="checked" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="grid">
+          <p>Your passions</p>
+          @for (item of passions; track $index) {
+          <ion-item>
+            <p (click)="select($index)">{{item.name}} {{ (item.selected) ? '👍' : ''}}</p>
+          </ion-item>
+          }
+        </div>
+        <h1>Your birthday</h1>
+        <ion-datetime presentation="date" (ionChange)="doDone($event)" [value]="user.birthDate"/>
+        <div class="imgs">
+          @for (item of user.photos; track $index) {
+          <ion-card class="card">
+            <ion-card-content>
+              <img src="{{item.url}}" alt="">
+            </ion-card-content>
+            <app-button (click)="deleteImg(item.path)" text="delete" />
+          </ion-card>
+          }
+        </div>
+        <app-button (click)="getImg()" text="New image" />
+        <div class="buttons">
+          <app-button (click)="exit()" text="Exit" />
+          <app-button text="Update" type="submit" />
+        </div>
+      </form>
+    }
   }@else {
   <ion-spinner />
   }

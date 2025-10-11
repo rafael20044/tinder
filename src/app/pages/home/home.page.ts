@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
+import { IonTabs } from '@ionic/angular';
 import { Const } from 'src/app/const/const';
 import { IUserCreate } from 'src/app/interfaces/iuser-create';
 import { IUserMatch } from 'src/app/interfaces/iuser-match';
+import { ProfileComponent } from 'src/app/shared/components/profile/profile.component';
 import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { DatabaseService } from 'src/app/shared/services/database-service';
@@ -18,34 +20,46 @@ import Matching from 'src/plugins/matching';
 })
 export class HomePage implements OnInit {
 
-  uid: string | null = "";
+  @ViewChild(ProfileComponent) profile!: ProfileComponent;
+  @ViewChild('tabs', { static: true }) tabs!: IonTabs;
 
   constructor(
-    private readonly database:DatabaseService, 
-    private readonly local:LocalStorageService,
-    private readonly toast:Toast
+    private readonly database: DatabaseService,
+    private readonly local: LocalStorageService,
+    private readonly toast: Toast
   ) { }
 
   ngOnInit() {
-    this.uid = this.local.get<string>('uid');
+
   }
 
 
-  async openMatch(){
+  async openMatch() {
     // co]sole.log(usersF);
     if (Capacitor.isNativePlatform()) {
       this.toast.presentToast('bottom', 'wait a minute');
       const users = await this.database.getAll<IUserCreate>(Const.COLLECTION_USERS);
-      const usersF = users.filter(u => u.uid != this.uid);
-      await Matching.open({users: usersF});
+      const uid = this.local.get<string>('uid');
+      const usersF = users.filter(u => u.uid != uid);
+      await Matching.open({ users: usersF });
     }
   }
 
-  async openChat(){
+  async openChat() {
     if (Capacitor.isNativePlatform()) {
       this.toast.presentToast('bottom', 'wait a minute');
       await ChatPlugin.open();
     }
+  }
+
+  onTabChange(event: any) {
+    if (event.tab === 'profile' && this.profile) {
+      this.profile.refresh();
+    }
+  }
+
+  handleLogout() {
+    this.tabs.select('home');
   }
 
 }

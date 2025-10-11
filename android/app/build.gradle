@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "io.ionic.starter"
+    buildFeatures {
+      viewBinding true
+    }
+  namespace "io.ionic.starter"
     compileSdk rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.ionic.starter"

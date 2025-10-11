@@ -29,4 +29,18 @@
     <item name="android:background">?android:attr/colorBackground</item>
     <item name="android:textColor">?android:attr/textColorPrimary</item>
   </style>
+  <!-- Icon Button Styles -->
+  <style name="Widget.TinderApp.Button.Icon" parent="Widget.Material3.Button">
+    <item name="backgroundTint">@color/tinder_white</item>
+    <item name="cornerRadius">25dp</item>
+    <item name="iconSize">20dp</item>
+    <item name="android:elevation">4dp</item>
+    <item name="android:shadowColor">#33000000</item>
+  </style>
+
+  <style name="Widget.TinderApp.Button.Icon.Large" parent="Widget.TinderApp.Button.Icon">
+    <item name="cornerRadius">35dp</item>
+    <item name="iconSize">28dp</item>
+    <item name="android:elevation">8dp</item>
+  </style>
 </resources>

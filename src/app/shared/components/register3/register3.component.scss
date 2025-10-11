@@ -1,5 +1,249 @@
-.buttons{
+.part2 {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.part2 h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--tinder-dark-gray);
+    line-height: 1.3;
+}
+
+ion-datetime {
+    --background: var(--tinder-white);
+    --border-radius: 20px;
+    --box-shadow: 0 8px 32px rgba(254, 60, 114, 0.1);
+    border: 2px solid rgba(254, 60, 114, 0.1);
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+ion-datetime::part(header) {
+    background: var(--tinder-gradient);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 1.5rem;
+}
+
+ion-datetime::part(header-cell) {
+    color: white;
+    font-weight: 600;
+}
+
+
+ion-datetime::part(navigation-button) {
+    color: white;
+    font-size: 1.5rem;
+}
+
+ion-datetime::part(navigation-button):hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+ion-datetime::part(calendar-day) {
+    color: var(--tinder-dark-gray);
+    font-weight: 500;
+    border-radius: 50%;
+    margin: 2px;
+}
+
+ion-datetime::part(calendar-day):hover {
+    background: rgba(254, 60, 114, 0.1);
+}
+
+ion-datetime::part(calendar-day today) {
+    color: var(--tinder-pink);
+    font-weight: 700;
+}
+
+ion-datetime::part(calendar-day active) {
+    background: var(--tinder-gradient);
+    color: white;
+}
+
+
+ion-datetime::part(day-of-week) {
+    color: var(--tinder-gray);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+ion-datetime::part(month-year) {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+
+ion-datetime::part(wheel-item) {
+    color: var(--tinder-dark-gray);
+}
+
+ion-datetime::part(wheel-item active) {
+    color: var(--tinder-pink);
+    font-weight: 700;
+}
+
+/* Botones de acción */
+ion-datetime::part(action-button) {
+    color: var(--tinder-pink);
+    font-weight: 600;
+    text-transform: none;
+}
+
+ion-datetime::part(action-button):hover {
+    background: rgba(254, 60, 114, 0.1);
+}
+
+
+.buttons {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.buttons app-button {
+    flex: 1;
+    max-width: 150px;
+}
+
+.buttons app-button:first-child {
+    --background: var(--tinder-light-gray);
+    --color: var(--tinder-dark-gray);
+    --background-activated: #e8e8e8;
+    --background-hover: #e8e8e8;
+}
+
+.buttons app-button:last-child {
+    --background: var(--tinder-gradient);
+    --color: white;
+    --background-activated: var(--tinder-pink);
+    --background-hover: var(--tinder-pink);
+}
+
+
+.selected-date {
+    text-align: center;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    color: var(--tinder-dark-gray);
+}
+
+.selected-date span {
+    background: var(--tinder-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+}
+
+
+.age-validation {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.age-validation.valid {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.age-validation.invalid {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    animation: shake 0.5s ease;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+ion-datetime.datetime-selected {
+    animation: pulse 0.5s ease;
+    border-color: var(--tinder-pink);
+}
+
+
+
+
+.part2::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--tinder-gradient);
+    border-radius: 2px;
+    margin: 0 auto 2rem auto;
+}
+
+
+.buttons app-button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+.part2.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+ion-datetime,
+.buttons app-button {
+    transition: all 0.3s ease;
 }

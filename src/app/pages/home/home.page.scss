@@ -1,0 +1,269 @@
+ion-content {
+    --background: #ffffff;
+}
+
+ion-tabs {
+    height: 100vh;
+}
+
+
+ion-tab-bar {
+    --background: #ffffff;
+    --border: 1px solid var(--tinder-light-gray);
+    box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    height: 70px;
+}
+
+ion-tab-button {
+    --color: var(--tinder-gray);
+    --color-selected: var(--tinder-pink);
+    --background: transparent;
+    --background-focused: transparent;
+    --padding-start: 0;
+    --padding-end: 0;
+    border-radius: 0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+
+ion-tab-button ion-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+
+ion-tab-button {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+ion-tab-button.tab-selected {
+    --color: var(--tinder-pink);
+    transform: translateY(-2px);
+}
+
+ion-tab-button.tab-selected ion-icon {
+    transform: scale(1.1);
+}
+
+
+ion-tab-button.tab-selected::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 3px;
+    background: var(--tinder-gradient);
+    border-radius: 2px;
+    animation: slideIn 0.3s ease;
+}
+
+
+ion-tab-button:hover:not(.tab-selected) {
+    --color: var(--tinder-dark-gray);
+    transform: translateY(-1px);
+}
+
+ion-tab-button:hover:not(.tab-selected) ion-icon {
+    transform: scale(1.05);
+}
+
+
+ion-tab-button:nth-child(2) {
+    position: relative;
+}
+
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(254, 60, 114, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(254, 60, 114, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(254, 60, 114, 0);
+    }
+}
+
+ion-tab-button:nth-child(2):hover {
+    animation: pulse 2s infinite;
+}
+
+
+ion-tab {
+    background: #ffffff;
+}
+
+
+@keyframes slideIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+app-home-c,
+app-profile {
+    animation: fadeIn 0.4s ease-out;
+}
+
+
+.notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    background: var(--tinder-pink);
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    53%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40%,
+    43% {
+        transform: translateY(-3px);
+    }
+
+    70% {
+        transform: translateY(-2px);
+    }
+
+    90% {
+        transform: translateY(-1px);
+    }
+}
+
+
+@media (max-width: 480px) {
+    ion-tab-bar {
+        height: 65px;
+        padding: 6px 0;
+    }
+
+    ion-tab-button ion-icon {
+        font-size: 1.3rem;
+    }
+
+    ion-tab-button {
+        font-size: 0.65rem;
+    }
+
+    .notification-badge {
+        width: 16px;
+        height: 16px;
+        font-size: 0.55rem;
+        top: 6px;
+        right: 18px;
+    }
+}
+
+@media (max-height: 700px) {
+    ion-tab-bar {
+        height: 60px;
+    }
+}
+
+.loading-tab {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading-tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
+ion-tab {
+    transition: opacity 0.3s ease;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    ion-tab-button,
+    ion-icon,
+    .notification-badge {
+        animation: none;
+        transition: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    ion-tab-bar {
+        --border: 2px solid var(--tinder-dark-gray);
+    }
+
+    ion-tab-button.tab-selected {
+        --color: #000000;
+    }
+
+    ion-tab-button.tab-selected::after {
+        background: #000000;
+    }
+}
+
+ion-tab-button:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}

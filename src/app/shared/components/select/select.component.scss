@@ -1,0 +1,221 @@
+ion-select {
+    --background: var(--tinder-light-gray);
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    --placeholder-color: var(--tinder-gray);
+    --placeholder-opacity: 0.8;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+ion-select::part(label) {
+    color: var(--tinder-dark-gray);
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+ion-select::part(text) {
+    color: var(--tinder-dark-gray);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+ion-select::part(icon) {
+    color: var(--tinder-pink);
+    opacity: 1;
+}
+
+
+ion-select:focus-within {
+    --background: white;
+    box-shadow: 0 0 0 2px var(--tinder-pink);
+}
+
+
+ion-select:hover {
+    --background: #e8e8e8;
+}
+
+
+ion-alert.select-alert,
+ion-popover.select-popover {
+    --background: white;
+}
+
+
+ion-alert .alert-head,
+ion-popover .popover-content {
+    background: var(--tinder-gradient);
+    color: white;
+}
+
+.alert-title,
+.alert-sub-title {
+    color: white !important;
+}
+
+
+ion-alert .alert-radio-group,
+ion-popover .select-popover ion-list {
+    background: white;
+    border-radius: 0 0 12px 12px;
+}
+
+
+.alert-radio-label,
+ion-select-option::part(text) {
+    color: var(--tinder-dark-gray);
+    font-size: 16px;
+    padding: 12px 16px;
+}
+
+
+.alert-radio-inner {
+    border-color: var(--tinder-pink) !important;
+}
+
+.alert-radio-outer {
+    border-color: var(--tinder-gray) !important;
+}
+
+[aria-checked=true] .alert-radio-outer {
+    border-color: var(--tinder-pink) !important;
+}
+
+[aria-checked=true] .alert-radio-inner {
+    background-color: var(--tinder-pink) !important;
+}
+
+
+.alert-radio-label[aria-checked=true],
+ion-select-option[selected]::part(text) {
+    color: var(--tinder-pink) !important;
+    font-weight: 600;
+}
+
+
+.alert-radio-label:hover,
+ion-select-option:hover::part(text) {
+    background-color: rgba(254, 60, 114, 0.1);
+}
+
+
+.alert-button-group {
+    padding: 16px;
+    gap: 12px;
+}
+
+.alert-button {
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    margin: 0 !important;
+    flex: 1;
+}
+
+
+.alert-button-role-cancel {
+    background: var(--tinder-light-gray) !important;
+    color: var(--tinder-dark-gray) !important;
+}
+
+
+.alert-button:not(.alert-button-role-cancel) {
+    background: var(--tinder-gradient) !important;
+    color: white !important;
+}
+
+
+.alert-radio-group::-webkit-scrollbar {
+    width: 6px;
+}
+
+.alert-radio-group::-webkit-scrollbar-track {
+    background: var(--tinder-light-gray);
+}
+
+.alert-radio-group::-webkit-scrollbar-thumb {
+    background: var(--tinder-pink);
+    border-radius: 10px;
+}
+
+.alert-radio-group::-webkit-scrollbar-thumb:hover {
+    background: var(--tinder-orange);
+}
+
+ion-select.ng-valid.ng-touched {
+    box-shadow: 0 0 0 2px #4CAF50;
+}
+
+ion-select.ng-invalid.ng-touched {
+    box-shadow: 0 0 0 2px #f44336;
+}
+
+
+ion-select[has-value]::part(placeholder) {
+    color: transparent;
+}
+
+ion-select[disabled] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    ion-select {
+        --padding-start: 14px;
+        --padding-end: 14px;
+        --padding-top: 14px;
+        --padding-bottom: 14px;
+    }
+
+    .alert-button-group {
+        flex-direction: column;
+    }
+
+    .alert-button {
+        width: 100%;
+    }
+}
+
+.alert-radio-label {
+    animation: fadeInUp 0.3s ease-out;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-radio-label:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.alert-radio-label:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.alert-radio-label:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.alert-radio-label:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.alert-radio-label:nth-child(5) {
+    animation-delay: 0.25s;
+}

@@ -6,6 +6,7 @@ import { IUserCreate } from 'src/app/interfaces/iuser-create';
 import { Toast } from 'src/app/shared/provider/toast';
 import { AuthService } from 'src/app/shared/services/auth-service';
 import { DatabaseService } from 'src/app/shared/services/database-service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +45,8 @@ export class RegisterPage implements OnInit {
     private readonly auth:AuthService, 
     private readonly database:DatabaseService,
     private readonly router:Router,
-    private readonly toast:Toast
+    private readonly toast:Toast,
+    private readonly local:LocalStorageService,
   ) { }
 
   async ngOnInit() {
@@ -88,6 +90,8 @@ export class RegisterPage implements OnInit {
         photos: photos,
       }
       await this.database.setData(Const.COLLECTION_USERS, user);
+      this.local.set('uid', user.uid);
+      this.local.set('reload', true);
       this.formGroup.reset();
       this.router.navigate(['/home']);
     }

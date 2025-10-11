@@ -1,0 +1,49 @@
+ion-input {
+    --background: var(--tinder-light-gray);
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    margin-bottom: 1.5rem;
+    font-size: 16px;
+}
+
+ion-input .input-label {
+    color: var(--tinder-dark-gray);
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+ion-input::part(placeholder) {
+    color: var(--tinder-gray);
+    opacity: 0.8;
+}
+
+ion-input::part(input) {
+    color: var(--tinder-dark-gray);
+    font-size: 16px;
+}
+
+ion-input:focus-within {
+    --background: white;
+    box-shadow: 0 0 0 2px var(--tinder-pink);
+}
+
+ion-input-password-toggle {
+    color: var(--tinder-gray);
+}
+
+ion-input-password-toggle:hover {
+    color: var(--tinder-pink);
+}
+
+form {
+    width: 100%;
+}
+
+ion-button,
+ion-input {
+    transition: all 0.3s ease;
+}

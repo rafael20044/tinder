@@ -1,11 +1,158 @@
-.body{
+.body {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
 }
 
-ion-item{
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--tinder-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    letter-spacing: -0.5px;
+}
+
+p {
+    color: var(--tinder-dark-gray);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+}
+
+
+.rules {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+
+ion-list {
+    background: transparent;
+    padding: 0;
+}
+
+ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --border-color: transparent;
+    margin-bottom: 1.5rem;
+    align-items: flex-start;
+}
+
+ion-item::part(native) {
+    background: var(--tinder-light-gray);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+ion-item:hover::part(native) {
+    border-color: var(--tinder-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(254, 60, 114, 0.15);
+}
+
+ion-item::before {
+    content: "✓";
+    background: var(--tinder-gradient);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+ion-item div {
     display: flex;
     flex-direction: column;
+}
+
+ion-item h2 {
+    color: var(--tinder-dark-gray);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+ion-item p {
+    color: var(--tinder-gray);
+    font-size: 1rem;
+    line-height: 1.4;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+app-button {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.rules {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+ion-item {
+    animation: slideIn 0.5s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+ion-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+ion-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+ion-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+app-button {
+    display: block;
 }

@@ -1,17 +1,29 @@
-
-h1{
-    text-align: center;
-}
-
-form{
-    margin-top: 2rem;
+.body {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-.buttons{
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    background: var(--tinder-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.buttons {
     display: flex;
-    justify-content: space-around;
+    gap: 12px;
+    margin-top: 2rem;
     align-items: center;
+    justify-content: center;
 }

@@ -1,0 +1,170 @@
+ion-header {
+    background: var(--tinder-gradient);
+}
+
+ion-toolbar {
+    --background: transparent;
+    --border-width: 0;
+}
+
+ion-title {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.5px;
+}
+
+ion-content {
+    --background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+ion-content p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--tinder-dark-gray);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.welcome-icon {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    background: var(--tinder-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: float 3s ease-in-out infinite;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.action-buttons app-button {
+    min-width: 150px;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+ion-content p {
+    animation: fadeIn 0.8s ease-out;
+}
+
+
+.background-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: var(--tinder-gradient);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.particle:nth-child(1) {
+    width: 80px;
+    height: 80px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    top: 60%;
+    right: 10%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(3) {
+    width: 60px;
+    height: 60px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 2s;
+}
+
+
+ion-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .welcome-icon,
+    .particle,
+    ion-content p {
+        animation: none;
+    }
+}
+
+ion-content p {
+    transition: transform 0.3s ease;
+}
+
+ion-content p:hover {
+    transform: scale(1.02);
+}

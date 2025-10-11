@@ -35,3 +35,12 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 // @import "@ionic/angular/css/palettes/dark.system.css";
+:root {
+    --tinder-pink: #fe3c72;
+    --tinder-orange: #ff7e47;
+    --tinder-gradient: linear-gradient(45deg, var(--tinder-pink), var(--tinder-orange));
+    --tinder-gray: #9b9b9b;
+    --tinder-light-gray: #f0f0f0;
+    --tinder-dark-gray: #424242;
+    --tinder-white: #ffffff;
+}

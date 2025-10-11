@@ -1,15 +1,280 @@
-.grid{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+.part2 {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    animation: fadeInUp 0.5s ease-out;
 }
 
-.grid p{
+.part2 h1 {
     text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--tinder-dark-gray);
 }
 
-.buttons{
-    margin-top: 1rem;
+.part2>p {
+    text-align: center;
+    color: var(--tinder-gray);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.passions {
+    margin: 2rem 0;
+}
+
+ion-list {
+    background: transparent;
+    padding: 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+
+ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    --border-color: transparent;
+    margin: 0;
+}
+
+ion-item::part(native) {
+    background: var(--tinder-light-gray);
+    border: 2px solid transparent;
+    border-radius: 25px;
+    padding: 0;
+    margin: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+ion-item:hover::part(native) {
+    border-color: var(--tinder-pink);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(254, 60, 114, 0.2);
+}
+
+ion-item.selected::part(native) {
+    background: var(--tinder-gradient);
+    border-color: var(--tinder-pink);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(254, 60, 114, 0.3);
+}
+
+ion-item p {
+    color: var(--tinder-dark-gray);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 12px 20px;
+    margin: 0;
+    text-align: center;
+    transition: all 0.3s ease;
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+ion-item:hover p {
+    color: var(--tinder-pink);
+}
+
+ion-item.selected p {
+    color: white;
+    font-weight: 600;
+}
+
+ion-item p::after {
+    content: "";
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: scale(0);
+}
+
+ion-item.selected p::after {
+    content: "👍";
+    opacity: 1;
+    transform: scale(1);
+    animation: popIn 0.3s ease;
+}
+
+.selection-counter {
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--tinder-gray);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.selection-counter span {
+    color: var(--tinder-pink);
+    font-weight: 700;
+}
+
+.buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.buttons app-button {
+    flex: 1;
+    max-width: 150px;
+}
+
+.buttons app-button:first-child {
+    --background: var(--tinder-light-gray);
+    --color: var(--tinder-dark-gray);
+    --background-activated: #e8e8e8;
+    --background-hover: #e8e8e8;
+}
+
+.buttons app-button:last-child {
+    --background: var(--tinder-gradient);
+    --color: white;
+    --background-activated: var(--tinder-pink);
+    --background-hover: var(--tinder-pink);
+}
+
+.buttons app-button:last-child:disabled {
+    --background: var(--tinder-gray);
+    --color: white;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    53%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40%,
+    43% {
+        transform: translateY(-8px);
+    }
+
+    70% {
+        transform: translateY(-4px);
+    }
+
+    90% {
+        transform: translateY(-2px);
+    }
+}
+
+
+ion-item.selected {
+    animation: bounce 0.6s ease;
+}
+
+.part2::before {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--tinder-gradient);
+    border-radius: 2px;
+    margin: 0 auto 2rem auto;
+}
+
+.buttons app-button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+ion-item,
+.buttons app-button {
+    transition: all 0.3s ease;
+}
+
+
+.validation-message {
+    text-align: center;
+    color: #f44336;
+    font-size: 14px;
+    margin-top: 1rem;
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.passions {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.passions::-webkit-scrollbar {
+    width: 6px;
+}
+
+.passions::-webkit-scrollbar-track {
+    background: var(--tinder-light-gray);
+    border-radius: 10px;
+}
+
+.passions::-webkit-scrollbar-thumb {
+    background: var(--tinder-pink);
+    border-radius: 10px;
+}
+
+.passions::-webkit-scrollbar-thumb:hover {
+    background: var(--tinder-orange);
 }

@@ -1,11 +1,13 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <h1>Login</h1>
-  <form [formGroup]="formGroup" (submit)="doSubmit()">
-    <app-input label="Email" type="email" placeholder="example@gmail.com" [control]="emailControl" />
-    <app-input label="password" type="password" placeholder="**********" [control]="passwordControl"/>
-    <div class="buttons">
-      <app-button (click)="goToRegister()" text="Register" />
-      <app-button text="Login" type="submit"/>
-    </div>
-  </form>
+  <div class="body">
+    <h1>Login</h1>
+    <form [formGroup]="formGroup" (submit)="doSubmit()">
+      <app-input label="Email" type="email" placeholder="example@gmail.com" [control]="emailControl" />
+      <app-input label="password" type="password" placeholder="**********" [control]="passwordControl"/>
+      <div class="buttons">
+        <app-button (click)="goToRegister()" text="Register" />
+        <app-button text="Login" type="submit"/>
+      </div>
+    </form>
+  </div>
 </ion-content>

@@ -1,0 +1,20 @@
+ion-button {
+    --background: var(--tinder-gradient);
+    --background-activated: var(--tinder-pink);
+    --background-hover: var(--tinder-pink);
+    --border-radius: 25px;
+    --box-shadow: 0 4px 12px rgba(254, 60, 114, 0.3);
+    --color: white;
+    font-weight: 600;
+    text-transform: none;
+    font-size: 16px;
+    height: 48px;
+    margin: 0;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+ion-button:hover {
+    --box-shadow: 0 6px 16px rgba(254, 60, 114, 0.4);
+    transform: translateY(-2px);
+}

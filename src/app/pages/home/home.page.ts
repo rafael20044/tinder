@@ -38,10 +38,8 @@ export class HomePage implements OnInit {
     // co]sole.log(usersF);
     if (Capacitor.isNativePlatform()) {
       this.toast.presentToast('bottom', 'wait a minute');
-      const users = await this.database.getAll<IUserCreate>(Const.COLLECTION_USERS);
       const uid = this.local.get<string>('uid');
-      const usersF = users.filter(u => u.uid != uid);
-      await Matching.open({ users: usersF });
+      await Matching.open({ uid: uid || ''});
     }
   }
 

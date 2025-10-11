@@ -8,13 +8,16 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 import io.ionic.starter.controller.ChatController;
+import io.ionic.starter.controller.ChatListController;
 
 @CapacitorPlugin(name = "ChatPlugin")
 public class ChatPlugin extends Plugin {
 
   @PluginMethod
   public void open(PluginCall call){
-    Intent intent = new Intent(getContext(), ChatController.class);
+    var uid = call.getString("uid");
+    Intent intent = new Intent(getContext(), ChatListController.class);
+    intent.putExtra("uid", uid);
     getActivity().startActivity(intent);
     call.resolve();
   }

@@ -43,4 +43,11 @@
     <item name="iconSize">28dp</item>
     <item name="android:elevation">8dp</item>
   </style>
+  <style name="TinderButton" parent="Widget.AppCompat.Button">
+    <item name="android:background">@drawable/button_gradient</item>
+    <item name="android:textColor">@color/tinder_white</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:padding">12dp</item>
+    <item name="android:elevation">4dp</item>
+  </style>
 </resources>

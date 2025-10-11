@@ -29,6 +29,9 @@
       android:name=".controller.ChatController"
       android:exported="false" />
     <activity
+      android:name=".controller.ChatListController"
+      android:exported="false" />
+    <activity
       android:name=".controller.MatchingController"
       android:exported="false" />
     <activity

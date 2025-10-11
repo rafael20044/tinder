@@ -39,14 +39,19 @@ export class HomePage implements OnInit {
     if (Capacitor.isNativePlatform()) {
       this.toast.presentToast('bottom', 'wait a minute');
       const uid = this.local.get<string>('uid');
-      await Matching.open({ uid: uid || ''});
+      const user = await this.database.findUserByUid(uid || '');
+      if (user) {
+        const fullName = `${user.name} ${user.lastName}`;
+        await Matching.open({ uid: uid || '', name: fullName || ''});
+      }
     }
   }
 
   async openChat() {
     if (Capacitor.isNativePlatform()) {
       this.toast.presentToast('bottom', 'wait a minute');
-      await ChatPlugin.open();
+      const uid = this.local.get<string>('uid');
+      await ChatPlugin.open({uid: uid || ''});
     }
   }
 

@@ -8,13 +8,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.ionic.starter.R;
 import io.ionic.starter.model.User;
+import io.ionic.starter.service.ChatService;
 import io.ionic.starter.service.UserService;
 
 public class MatchingController extends AppCompatActivity {
@@ -27,9 +31,12 @@ public class MatchingController extends AppCompatActivity {
   private Button backBtn;
   private Button next2Btn;
   private List<User> users = new ArrayList<User>();
-  private UserService service = new UserService();
+  private UserService userService = new UserService();
+  private ChatService chatService = new ChatService(); // Agregar ChatService
   private int index = 0;
   private int indexPhoto = 0;
+  private String currentUserId;
+  private String currentUserName;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,23 +45,22 @@ public class MatchingController extends AppCompatActivity {
     this.loadVars();
 
     // Obtener datos directamente del intent
-    String currentUid = getIntent().getStringExtra("uid");
+    currentUserId = getIntent().getStringExtra("uid");
+    currentUserName = getIntent().getStringExtra("name");
 
-    if (currentUid == null) {
+    if (currentUserId == null) {
       Toast.makeText(this, "No data available", Toast.LENGTH_SHORT).show();
       this.name.setText("No data");
       return;
     }
 
-    // Mostrar loading
     showLoading();
 
-    // Cargar usuarios de forma asíncrona usando getAll()
-    loadUsers(currentUid);
+    loadUsers(currentUserId);
   }
 
   private void loadUsers(String currentUid) {
-    service.getAll("users", User.class,
+    userService.getAll("users", User.class,
       new UserService.FirebaseCallback<List<User>>() {
         @Override
         public void onSuccess(List<User> result) {
@@ -97,14 +103,11 @@ public class MatchingController extends AppCompatActivity {
   }
 
   private void showLoading() {
-    // Puedes mostrar un ProgressBar aquí
     name.setText("Loading...");
-    // Deshabilitar botones mientras carga
     setButtonsEnabled(false);
   }
 
   private void hideLoading() {
-    // Ocultar ProgressBar si lo agregaste
     setButtonsEnabled(true);
   }
 
@@ -151,7 +154,6 @@ public class MatchingController extends AppCompatActivity {
           .into(imageView);
       }
     } else {
-      // Si no hay fotos, mostrar placeholder
       imageView.setImageResource(R.drawable.ic_launcher_background);
     }
   }
@@ -181,10 +183,8 @@ public class MatchingController extends AppCompatActivity {
     User matchedUser = users.get(index);
     Toast.makeText(this, "You liked " + matchedUser.getName() + "! 💖", Toast.LENGTH_SHORT).show();
 
-    // Aquí puedes agregar lógica para guardar el match
-    // saveMatch(matchedUser);
+    createChatWithUser(matchedUser);
 
-    // Avanzar al siguiente usuario automáticamente
     eventDislikeBtn();
   }
 
@@ -197,11 +197,57 @@ public class MatchingController extends AppCompatActivity {
     User superLikedUser = users.get(index);
     Toast.makeText(this, "You super liked " + superLikedUser.getName() + "! ⭐", Toast.LENGTH_SHORT).show();
 
-    // Aquí puedes agregar lógica para guardar el super like
-    // saveSuperLike(superLikedUser);
+    // También crear chat con super like
+    createChatWithUser(superLikedUser);
 
     // Avanzar al siguiente usuario automáticamente
     eventDislikeBtn();
+  }
+
+  private void createChatWithUser(User matchedUser) {
+    if (currentUserId == null || currentUserName == null) {
+      Toast.makeText(this, "Cannot create chat: user data missing", Toast.LENGTH_SHORT).show();
+      return;
+    }
+
+    chatService.getOrCreateChat(currentUserId, currentUserName,
+      matchedUser.getUid(), matchedUser.getName(),
+      new ChatService.FirebaseCallback<DocumentReference>() {
+        @Override
+        public void onSuccess(DocumentReference chatRef) {
+          runOnUiThread(() -> {
+            // Opcional: mostrar mensaje de que el chat fue creado
+            Toast.makeText(MatchingController.this,
+              "Chat created with " + matchedUser.getName() + "!",
+              Toast.LENGTH_SHORT).show();
+
+            // Aquí podrías guardar también el match en una colección separada
+            saveMatch(matchedUser, chatRef.getId());
+          });
+        }
+
+        @Override
+        public void onError(Exception exception) {
+          runOnUiThread(() -> {
+            Toast.makeText(MatchingController.this,
+              "Error creating chat: " + exception.getMessage(),
+              Toast.LENGTH_SHORT).show();
+          });
+        }
+      });
+  }
+
+  private void saveMatch(User matchedUser, String chatId) {
+    // Puedes implementar esto para tener un historial de matches
+    // Por ejemplo, en una colección "matches"
+    Map<String, Object> matchData = new HashMap<>();
+    matchData.put("user1Id", currentUserId);
+    matchData.put("user2Id", matchedUser.getUid());
+    matchData.put("user1Name", currentUserName);
+    matchData.put("user2Name", matchedUser.getName());
+    matchData.put("chatId", chatId);
+    matchData.put("matchedAt", com.google.firebase.Timestamp.now());
+    matchData.put("active", true);
   }
 
   private void eventBack() {
@@ -245,22 +291,12 @@ public class MatchingController extends AppCompatActivity {
     backBtn = findViewById(R.id.backBtn);
   }
 
-  // Métodos opcionales para guardar matches
-  private void saveMatch(User matchedUser) {
-    // Implementar lógica para guardar el match en Firebase
-    // service.saveMatch(currentUserId, matchedUser.getUid());
-  }
-
-  private void saveSuperLike(User superLikedUser) {
-    // Implementar lógica para guardar super like en Firebase
-    // service.saveSuperLike(currentUserId, superLikedUser.getUid());
-  }
-
   @Override
   protected void onDestroy() {
     super.onDestroy();
     if (users != null) {
       users.clear();
     }
+    chatService.stopListening();
   }
 }

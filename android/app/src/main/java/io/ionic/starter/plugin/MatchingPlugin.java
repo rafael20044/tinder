@@ -15,8 +15,10 @@ public class MatchingPlugin extends Plugin {
   @PluginMethod
   public void open(PluginCall call){
     var uid = call.getString("uid");
+    var name = call.getString("name");
     Intent intent = new Intent(getContext(), MatchingController.class);
     intent.putExtra("uid", uid);
+    intent.putExtra("name", name);
     getActivity().startActivity(intent);
     call.resolve();
   }

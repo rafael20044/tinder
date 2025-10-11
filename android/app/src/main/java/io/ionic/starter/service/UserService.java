@@ -20,9 +20,6 @@ public class UserService {
     this.database = FirebaseFirestore.getInstance();
   }
 
-  /**
-   * Obtiene todos los documentos de una colección (asíncrono)
-   */
   public <T> void getAll(String nameCollection, Class<T> type, FirebaseCallback<List<T>> callback) {
     CollectionReference collectionRef = database.collection(nameCollection);
 
@@ -43,9 +40,6 @@ public class UserService {
       });
   }
 
-  /**
-   * Obtiene usuarios excluyendo al usuario actual (asíncrono)
-   */
   public <T> void getUsersExcludingCurrent(String collectionName, String currentUserUid, Class<T> type, FirebaseCallback<List<T>> callback) {
     database.collection(collectionName)
       .get()
@@ -67,9 +61,6 @@ public class UserService {
       });
   }
 
-  /**
-   * Interfaz para callbacks
-   */
   public interface FirebaseCallback<T> {
     void onSuccess(T result);
     void onError(Exception exception);

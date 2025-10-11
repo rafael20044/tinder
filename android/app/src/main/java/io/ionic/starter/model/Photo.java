@@ -4,7 +4,6 @@ public class Photo {
   private String path;
   private String url;
 
-  // --- Getters y Setters ---
 
   public String getPath() {
     return path;

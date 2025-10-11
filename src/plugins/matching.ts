@@ -3,7 +3,7 @@ import { IUserCreate } from 'src/app/interfaces/iuser-create';
 import { IUserMatch } from 'src/app/interfaces/iuser-match';
 
 export interface MatchingPlugin {
-    open:(option: {uid:string}) => Promise<void>;
+    open:(option: {uid:string, name:string}) => Promise<void>;
 }
 
 const Matching = registerPlugin<MatchingPlugin>('MatchingPlugin');

@@ -20,8 +20,6 @@ public class User {
   private List<String> passions;
   private List<Photo> photos;
 
-  // --- Getters y Setters ---
-
   public String getUid() {
     return uid;
   }

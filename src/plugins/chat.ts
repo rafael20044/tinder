@@ -1,7 +1,7 @@
 import { registerPlugin } from "@capacitor/core";
 
 interface IChatPlugin{
-    open:() => Promise<void>;
+    open:(option:{uid:string}) => Promise<void>;
 }
 
 const ChatPlugin:IChatPlugin = registerPlugin("ChatPlugin");
